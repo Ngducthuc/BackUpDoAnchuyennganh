@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+header {
+    height: 150px;
+    width: 100vw;
+    border-bottom: 2px solid #dddddd;
+    text-align: center;
+}
+
+.admin_content {
+    padding-top: 50px;
+    display: flex;
+}
+
+.admin_content_left {
+    background-color: #dddddd;
+    width: 20%;
+    height: 100vh;
+    padding: 30px 0 0 12px;
+}
+
+.admin_content_left>ul>li>a {
+    font-weight: bold;
+}
+
+.admin_content_left ul li {
+    margin: 6px 0;
+}
+
+.admin_content_left ul ul {
+    margin-left: 20px;
+}
+
+.admin_content_right {
+    width: 80%;
+    padding: 30px 0 0 12px;
+}
+
+.admin_content_right_cartegory_add input {
+    height: 30px;
+    width: 200px;
+    padding-left: 12px;
+    margin-top: 20px;
+}
+
+.admin_content_right_cartegory_add button {
+    display: block;
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    background-color: brown;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.admin_content_right_cartegory_add button:hover {
+    background-color: transparent;
+    border: 1px solid brown;
+    color: brown;
+}
+
+
+/*-----------------list----------------*/
+
+.admin_content_right_cartegory_list table {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.admin_content_right_cartegory_list table tr th,
+td {
+    border: 1px solid #dddddd;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+/*------------------Product---------------------*/
+
+.admin_content_right_product_add h1 {
+    margin-bottom: 20px;
+}
+
+.admin_content_right_product_add input,
+select {
+    width: 200px;
+    height: 30px;
+    display: block;
+    margin: 6px 0 12px 0;
+    padding-left: 12px;
+}
+
+.admin_content_right_product_add textarea {
+    display: block;
+    height: 200px;
+    width: 500px;
+    margin-bottom: 12px;
+    padding: 12px;
+}
+
+.admin_content_right_product_add button {
+    display: block;
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    background-color: brown;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.admin_content_right_product_add button:hover {
+    background-color: transparent;
+    border: 1px solid brown;
+    color: brown;
+}

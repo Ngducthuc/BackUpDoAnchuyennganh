@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.header-container,
+.footer-container {
+    flex-shrink: 0;
+}
+
+.notification-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    flex-grow: 1;
+    text-align: center;
+    padding: 20px;
+}
+
+.notification {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.notification h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.notification p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.notification button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.notification button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Thông báo khi thanh toán thành công */
+
+.paid {
+    border: 2px solid #28a745;
+    color: #28a745;
+}
+
+.paid h1,
+.paid p {
+    color: #28a745;
+}
+
+.paid button {
+    background-color: #28a745;
+}
+
+.paid button:hover {
+    background-color: #218838;
+}
+
+
+/* Thông báo khi chưa thanh toán */
+
+.unpaid {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+.unpaid h1,
+.unpaid p {
+    color: #dc3545;
+}
+
+.unpaid button {
+    background-color: #dc3545;
+}
+
+.unpaid button:hover {
+    background-color: #c82333;
+}
