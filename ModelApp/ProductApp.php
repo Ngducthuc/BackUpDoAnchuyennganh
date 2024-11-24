@@ -111,24 +111,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
             echo json_encode([
-                "status" => "success",
+                "Code" => 200,
                 "products" => $product_details
             ]);
         } else {
             echo json_encode([
-                "status" => "error",
+                "Code" => 403,
                 "message" => "Invalid token"
             ]);
         }
     } else {
         echo json_encode([
-            "status" => "error",
+            "Code" => 402,
             "message" => "Token not provided"
         ]);
     }
 } else {
     echo json_encode([
-        "status" => "error",
+        "Code" => 404,
         "message" => "Invalid request method"
     ]);
 }

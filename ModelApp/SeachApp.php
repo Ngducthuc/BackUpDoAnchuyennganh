@@ -83,7 +83,7 @@ if ($method === 'POST') {
 }
 http_response_code(400);
 echo json_encode([
-    "status" => "error",
+    "Code" => 404,
     "message" => "Invalid token or request method"
 ]);
 ?>

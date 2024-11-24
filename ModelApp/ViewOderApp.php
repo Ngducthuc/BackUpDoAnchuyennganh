@@ -32,24 +32,24 @@ if($method = 'POST'){
                         ];
                     }
                     echo json_encode([
-                        'status' => "sussess",
+                        'Code' => 200,
                         'data' => $Data_Oder_details
                     ]);
                 } else {
                     echo json_encode([
-                        "status" => "error",
+                        "Code" => 200,
                         "message" => "No orders found for this user."
                     ]);
                 }
             } else {
                 echo json_encode([
-                    "status" => "error",
+                    "Code" => 404,
                     "message" => "Invalid token or no user found."
                 ]);
             }
         } else {
             echo json_encode([
-                "status" => "error",
+                "Code" => 403,
                 "message" => "Invalid token"
             ]);
         }

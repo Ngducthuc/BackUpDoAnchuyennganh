@@ -29,19 +29,19 @@ switch ($method) {
             } else {
                 http_response_code(404);
                 echo json_encode([
-                    "code" => 404,
+                    "code" => 401,
                     "message" => "Error"]);
             }
         } else {
             http_response_code(400);
             echo json_encode([
-                "code" => 400,
+                "code" => 401,
                 "message" => "Error"]);
         }
         break;
     default:
     echo json_encode([
-        "code" => 405,
+        "code" => 401,
         "message" => "Error"]);
         break;
 }

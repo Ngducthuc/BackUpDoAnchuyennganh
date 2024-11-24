@@ -14,25 +14,25 @@ switch ($method) {
             $CheckDangKi = $register->Register($con, $nameUser, $email, $password);
             if ($CheckDangKi) {
                     echo json_encode([
-                        "code" => 200,
+                        "Code" => 200,
                         "message" => "Register Sussess"
                 ]);
             } else {
                 http_response_code(404);
                 echo json_encode([
-                    "code" => 404,
+                    "Code" => 401,
                     "message" => "Error"]);
             }
         } else {
             http_response_code(400);
             echo json_encode([
-                "code" => 400,
+                "Code" => 401,
                 "message" => "Error"]);
         }
         break;
     default:
     echo json_encode([
-        "code" => 405,
+        "Code" => 401,
         "message" => "Error"]);
         break;
 }
