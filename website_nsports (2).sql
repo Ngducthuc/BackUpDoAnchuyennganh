@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 03, 2024 lúc 06:59 PM
+-- Thời gian đã tạo: Th10 24, 2024 lúc 07:13 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -92,14 +92,8 @@ CREATE TABLE `tbl_data_keyseach` (
 --
 
 INSERT INTO `tbl_data_keyseach` (`id`, `email`, `key_seach`, `create_at`) VALUES
-(1, 'hieu@gmail.com', 'Áo', '2024-10-28'),
-(2, 'hieu@gmail.com', 'giày thể thao', '2024-10-28'),
-(8, 'hieu@gmail.com', 'Quần', '2024-10-28'),
-(9, 'hieu@gmail.com', 'giày thể thao', '2024-10-29'),
-(10, 'hieu@gmail.com', 'Quần', '2024-10-29'),
-(12, 'hieu@gmail.com', 'Quần', '2024-10-29'),
-(13, 'hieu@gmail.com', 'giày', '2024-10-29'),
-(14, 'hieu@gmail.com', 'áo', '2024-10-30');
+(20, 'hieu@gmail.com', 'áo', '2024-11-24'),
+(21, 'hieu@gmail.com', 'quần', '2024-11-24');
 
 -- --------------------------------------------------------
 
@@ -120,18 +114,7 @@ CREATE TABLE `tbl_data_log_user` (
 --
 
 INSERT INTO `tbl_data_log_user` (`id`, `email`, `product_id`, `time_spent`, `create_at`) VALUES
-(2, 'hieu@gmail.com', 11, 9, '2024-10-31'),
-(3, 'hieu@gmail.com', 14, 5, '2024-10-31'),
-(4, 'hieu@gmail.com', 15, 3, '2024-10-31'),
-(5, 'hieu@gmail.com', 14, 2, '2024-10-31'),
-(6, 'hieu@gmail.com', 20, 7, '2024-11-01'),
-(7, 'hieu@gmail.com', 19, 1, '2024-11-02'),
-(8, 'hieu@gmail.com', 23, 6, '2024-11-02'),
-(9, 'hieu@gmail.com', 18, 1, '2024-11-02'),
-(10, 'hieu@gmail.com', 19, 4, '2024-11-02'),
-(11, 'hieu@gmail.com', 15, 3, '2024-11-02'),
-(12, 'hieu@gmail.com', 18, 3, '2024-11-02'),
-(13, 'hieu@gmail.com', 23, 8, '2024-11-02');
+(17, 'hieu@gmail.com', 11, 12, '2024-11-24');
 
 -- --------------------------------------------------------
 
@@ -158,7 +141,8 @@ CREATE TABLE `tbl_oder` (
 --
 
 INSERT INTO `tbl_oder` (`id`, `email`, `phone`, `order_code`, `price`, `payment_method`, `payment_status`, `deliveryAddress`, `quantity`, `product_id`, `day_create`) VALUES
-(11, 'hieu@gmail.com', '0975816808', 22321, 500000, 'COD', 'Đã thanh toán', 'Hà nội', 1, 14, '2024-10-01');
+(11, 'hieu@gmail.com', '0975816808', 22321, 500000, 'COD', 'Đã thanh toán', 'Hà nội', 1, 14, '2024-10-01'),
+(13, 'hieu@gmail.com', '0975816808', 22321, 500000, 'COD', 'Đã thanh toán', 'Hà nội', 1, 14, '2024-10-01');
 
 -- --------------------------------------------------------
 
@@ -279,15 +263,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `token`, `rule`) VALUES
-(10, 'ggg', '123@gmail.com', '$2y$10$yZZiHDDKayR66/xOdsKwreY96J5fo6jVrbMaXWjAZacO9RZ8frE.y', '', 0),
-(11, 'gád', 'hahah@gmail.com', '$2y$10$YZQ.2cszQeig8O.uIePTgOmzsEfszVps3554//u9xFBnLx2RMaaIW', '', 0),
-(12, 'thuc', 'admin@gmail.com', '$2y$10$F/9deFlfPzRb4ST7k/x3o.1jo1rJ9IWQu/LiClD0h5Qd9DKgHJZJ.', 'RI001EMrIzFXLqvV6gN7d55Wovhukn', 0),
 (13, 'Nguyễn Tất Ngọc', 'ngoc@gmail.com', '$2y$10$n6OLHq0Sh/n1vY50QeW6K.4viXDMpD74wHGuk4KW509rbg1qC1v66', '', 1),
-(14, 'Nguyễn Đức Thức', 'hieu@gmail.com', '$2y$10$HQEdYJdG1i7FH5uW0ggn7.NJnzE10HDWQttqVL/iTStiY8Xua2L3C', 'muqdcQevJimxCUVfokG3It5MGiU19Z', 0),
-(15, 'ngngngn', 'abc@gmail.com', '$2y$10$5.laezU0JDqc5om2phjPY.WV6xECHhVhbxGZsP6T6hGaIbOXKHTDa', '', 0),
-(16, 'nguyen tat ngoc', 'ngoc123@gmail.com', '$2y$10$QJUTzYAQ/USx0HoK.VidfO.Tsv0k6CXo6l.Pzd/mrbej1YztnMhUu', '', 0),
-(17, 'test', 'test@gmail.com', '$2y$10$dM6cV2dtf/WrZn9hmcdbWuhm1WBT1XywNj2EuHs1NcOVrfN4j2bra', '', 0),
-(19, 'NguyenThuc', 'minhtientq112@gmail.com', '$2y$10$amZ.BjoFzooEgxf4Ed1C/ua8T8jsXchsMnE2IM5QM7PMWowZgXBuG', 'hQCB7jILB1QMOE4xhXJVDWNaPvpQ3R', 0);
+(14, 'Nguyễn Đức Thức', 'hieu@gmail.com', '$2y$10$HQEdYJdG1i7FH5uW0ggn7.NJnzE10HDWQttqVL/iTStiY8Xua2L3C', 'BJ4H3VjNFO8iYDA01VH4pONvoRedEA', 0),
+(17, 'test', 'test@gmail.com', '$2y$10$dM6cV2dtf/WrZn9hmcdbWuhm1WBT1XywNj2EuHs1NcOVrfN4j2bra', '', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -355,19 +333,19 @@ ALTER TABLE `tbl_cartegory`
 -- AUTO_INCREMENT cho bảng `tbl_data_keyseach`
 --
 ALTER TABLE `tbl_data_keyseach`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_data_log_user`
 --
 ALTER TABLE `tbl_data_log_user`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_oder`
 --
 ALTER TABLE `tbl_oder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product`

@@ -43,7 +43,7 @@ if (isset($_SESSION['emailUser'])) {
     $priority_2 = [];
     $priority_3 = [];
     if ($user_logs) {
-        foreach ($user_logs as $log) {
+        while ($log = $user_logs->fetch_assoc()) {
             if (!in_array($log['product_id'], $purchased_product_ids)) {
                 $priority_1[] = $log['product_id'];
             }
@@ -54,7 +54,7 @@ if (isset($_SESSION['emailUser'])) {
             $keyword = $row['key_seach'];
             $sql_search_products = "SELECT product_id FROM tbl_product WHERE product_name LIKE '%$keyword%'";
             $result_search_products = $db->select($sql_search_products);
-            if ($result_search_products && $result_search_products->num_rows > 0) {
+            if ($result_search_products) {
                 while ($product = $result_search_products->fetch_assoc()) {
                     if (!in_array($product['product_id'], $priority_1) && !in_array($product['product_id'], $purchased_product_ids)) {
                         $priority_2[] = $product['product_id'];
@@ -64,7 +64,7 @@ if (isset($_SESSION['emailUser'])) {
         }
     }
     if ($user_logs) {
-        foreach ($user_logs as $log) {
+        while ($log = $user_logs->fetch_assoc()) {
             if (!in_array($log['product_id'], $priority_1) && !in_array($log['product_id'], $priority_2) && !in_array($log['product_id'], $purchased_product_ids)) {
                 $priority_3[] = $log['product_id'];
             }
@@ -84,20 +84,25 @@ if (isset($_SESSION['emailUser'])) {
         usort($products, fn($a, $b) => $a['price_diff'] <=> $b['price_diff']);
         return array_column($products, 'product_id');
     }
-    $priority_1 = !empty($priority_1) ? sort_by_price_closeness($priority_1, $avg_price, $db) : [];
-    $priority_2 = !empty($priority_2) ? sort_by_price_closeness($priority_2, $avg_price, $db) : [];
-    $priority_3 = !empty($priority_3) ? sort_by_price_closeness($priority_3, $avg_price, $db) : [];
+    $priority_1 = sort_by_price_closeness($priority_1, $avg_price, $db);
+    $priority_2 = sort_by_price_closeness($priority_2, $avg_price, $db);
+    $priority_3 = sort_by_price_closeness($priority_3, $avg_price, $db);
     $final_products = array_unique(array_merge($priority_1, $priority_2, $priority_3));
 }
-$sql_total_products = "SELECT COUNT(product_id) AS total FROM tbl_product";
-$result_total_products = $db->select($sql_total_products);
-$total_products = $result_total_products ? $result_total_products->fetch_assoc()['total'] : 0;
-$total_pages = ceil($total_products / $limit);
-$sql_all_products = "SELECT product_id FROM tbl_product LIMIT $offset, $limit";
-$result_all_products = $db->select($sql_all_products);
-$final_products = [];
-if ($result_all_products) {
-    $final_products = array_column($result_all_products->fetch_all(MYSQLI_ASSOC), 'product_id');
+if (!empty($final_products)) {
+    $final_product_ids = implode(',', $final_products);
+    $sql_remaining_products = "SELECT product_id FROM tbl_product WHERE product_id NOT IN ($final_product_ids) LIMIT $offset, $limit";
+} else {
+    $sql_remaining_products = "SELECT product_id FROM tbl_product LIMIT $offset, $limit";
+}
+$result_remaining_products = $db->select($sql_remaining_products);
+$remaining_products = $result_remaining_products ? array_column($result_remaining_products->fetch_all(MYSQLI_ASSOC), 'product_id') : [];
+$final_products = array_unique(array_merge($final_products, $remaining_products)); 
+if (!empty($final_products)) {
+    $sql_total_products = "SELECT COUNT(product_id) AS total FROM tbl_product";
+    $result_total_products = $db->select($sql_total_products);
+    $total_products = $result_total_products ? $result_total_products->fetch_assoc()['total'] : 0;
+    $total_pages = ceil($total_products / $limit);
 }
 ?>
 <div class="breadcrumbs">
@@ -161,11 +166,13 @@ if ($result_all_products) {
         </div>
     </div>
     <div class="cartegory-right-content">
-        <?php
-        if(!empty($final_products)) {
-            foreach ($final_products as $product_id) {
-                $sql_product = "SELECT * FROM tbl_product WHERE product_id = $product_id";
-                $product = $db->select($sql_product)->fetch_assoc();
+    <?php
+    if (!empty($final_products)) {
+        foreach ($final_products as $product_id) {
+            $sql_product = "SELECT * FROM tbl_product WHERE product_id = $product_id";
+            $result_product = $db->select($sql_product);
+            if ($result_product) {
+                $product = $result_product->fetch_assoc();
                 ?>
                 <div class="cartegory-right-content-item">
                     <a href="index_chitiet.php?product_id=<?php echo $product['product_id']; ?>">
@@ -177,11 +184,13 @@ if ($result_all_products) {
                 </div>
                 <?php
             }
-        } else {
-            echo "<p>Không có sản phẩm nào</p>";
         }
-        ?>
-    </div>
+    } else {
+        echo "<p>Không có sản phẩm nào</p>";
+    }
+    ?>
+</div>
+
     <div class="cartegory-right-bottom row">
         <div class="cartegory-right-bottom-items">
             <p>Hiển Thị <?php echo min($limit, $total_products - $offset); ?> sản phẩm</p>
