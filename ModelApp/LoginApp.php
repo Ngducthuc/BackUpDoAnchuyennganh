@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+require_once '../admin/config.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
@@ -18,6 +18,7 @@ switch ($method) {
                     $insert_token = mysqli_query($con,"UPDATE users SET token = '$token' WHERE email = '$email'");
                     echo json_encode([
                         "code" => 200,
+                        "token" => $token,
                         "message" => "Login Sussess"
                 ]);
                 } else {

@@ -1,5 +1,5 @@
 <?php
-require_once 'database.php';
+require_once '../admin/database.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");

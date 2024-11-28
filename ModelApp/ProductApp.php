@@ -2,12 +2,11 @@
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
-require_once 'database.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['token'])) {
-        $token = $_POST['token'];
-        $db = new Database();
+require_once '../admin/database.php';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['token'])) {
+        $token = $_GET['token'];
+		$db = new Database();
         $sql_CheckToken = "SELECT token FROM users WHERE token = '$token'";
         $result_Token = $db->select($sql_CheckToken);
         if ($result_Token) {
@@ -15,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $final_products = [];
             $sql_search_keywords = "SELECT key_seach FROM tbl_data_keyseach WHERE email = '$emailUser'";
             $search_keywords = $db->select($sql_search_keywords);
+			
             $sql_user_logs = "
                 SELECT product_id, SUM(time_spent) AS total_time, COUNT(*) AS visit_count
                 FROM tbl_data_log_user
@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $remaining_products = array_diff($all_product_ids, $final_products);
                 $final_products = array_merge($final_products, $remaining_products);
             }
+			 
             $product_details = [];
             if (!empty($final_products)) {
                 $final_product_ids = implode(',', $final_products);
